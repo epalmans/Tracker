@@ -1,6 +1,6 @@
 <?php
 
-namespace Arrtrust\Tracker;
+namespace Palmans\Tracker;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -56,7 +56,7 @@ class TrackerServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             'tracker',
-            'Arrtrust\Tracker\Tracker'
+            'Palmans\Tracker\Tracker'
         );
     }
 }

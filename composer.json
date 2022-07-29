@@ -1,5 +1,5 @@
 {
-    "name": "arrtrust/tracker",
+    "name": "palmans/tracker",
     "description": "Simple site visit/statistics tracker for Laravel",
     "license": "MIT",
     "authors": [
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Arrtrust\\Tracker\\": "src/"
+            "Palmans\\Tracker\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -37,7 +37,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Arrtrust\\Tracker\\Tests\\": "tests/"
+            "Palmans\\Tracker\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -48,10 +48,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Arrtrust\\Tracker\\TrackerServiceProvider"
+                "Palmans\\Tracker\\TrackerServiceProvider"
             ],
             "aliases": {
-                "Tracker": "Arrtrust\\Tracker\\TrackerFacade"
+                "Tracker": "Palmans\\Tracker\\TrackerFacade"
             }
         }
     },

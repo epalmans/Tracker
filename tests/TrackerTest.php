@@ -1,8 +1,8 @@
 <?php
 
-namespace Arrtrust\Tracker\Tests;
+namespace Palmans\Tracker\Tests;
 
-use Arrtrust\Tracker\Tracker;
+use Palmans\Tracker\Tracker;
 use Prophecy\PhpUnit\ProphecyTrait;
 
 class TrackerTest extends TestBase
@@ -32,7 +32,7 @@ class TrackerTest extends TestBase
      */
     protected function getTracker()
     {
-        return $this->app->make('Arrtrust\Tracker\Tracker');
+        return $this->app->make('Palmans\Tracker\Tracker');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class TrackerTest extends TestBase
         $tracker = $this->getTracker();
 
         $this->assertEquals(
-            'Arrtrust\Tracker\SiteView',
+            'Palmans\Tracker\SiteView',
             $tracker->getViewModelName()
         );
     }
@@ -52,7 +52,7 @@ class TrackerTest extends TestBase
         $tracker = $this->getTracker();
 
         $this->assertInstanceOf(
-            'Arrtrust\Tracker\SiteView',
+            'Palmans\Tracker\SiteView',
             $tracker->makeNewViewModel()
         );
     }
@@ -63,7 +63,7 @@ class TrackerTest extends TestBase
         $tracker = $this->getTracker();
 
         $this->assertInstanceOf(
-            'Arrtrust\Tracker\SiteView',
+            'Palmans\Tracker\SiteView',
             $tracker->getCurrent()
         );
     }
@@ -135,7 +135,7 @@ class TrackerTest extends TestBase
 
         $view = $tracker->getCurrent();
 
-        $trackable = $this->prophesize('Arrtrust\Tracker\TrackableInterface');
+        $trackable = $this->prophesize('Palmans\Tracker\TrackableInterface');
         $trackable->attachTrackerView($view)
             ->willReturn(null)
             ->shouldBeCalled();

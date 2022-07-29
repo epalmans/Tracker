@@ -1,6 +1,6 @@
 # Tracker
 Simple site visit/statistics tracker for Laravel.
-
+[fork of [Arrtrust/Tracker](https://github.com/Arrtrust/Tracker)]
 ---
 
 Tracker provides a simple way to track your site visits and their statistics.
@@ -13,7 +13,7 @@ Tracker provides a simple way to track your site visits and their statistics.
 - Helper method, Facade, and trait for easing access to services
 - Handy 'Cruncher' for number crunching needs
 - Flushing and selecting site views with given time spans
-- A [phpunit](http://www.phpunit.de) test suite for easy development
+- A [phpunit](https://www.phpunit.de) test suite for easy development
 
 ## Installation
 Installing Tracker is simple.
@@ -27,7 +27,7 @@ Installing Tracker is simple.
     ```js
     {
         "require": {
-            "epalmans/tracker": "^2.0"
+            "palmans/tracker": "^2.0"
         }
     }
     ```
@@ -62,17 +62,17 @@ Installing Tracker is simple.
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'guard' => \App\Http\Middleware\Guard::class,
-        'track' => \Arrtrust\Tracker\TrackerMiddleware::class
+        'track' => \Palmans\Tracker\TrackerMiddleware::class
     ];
     ```
     It is better to register this middleware as a routeMiddleware instead of a global middleware and use it in routes or route groups definitions as it may not be necessary to persist all site view. This will persist and attach any Trackable that is added to stack to site views automatically when the request has been handled by Laravel.
     
-5. To attach views to any model or class, you should implement the `Arrtrust\Tracker\TrackableInterface` interface. Tracker provides `Arrtrust\Tracker\Trackable` trait to be used by Eloquent models.
+5. To attach views to any model or class, you should implement the `Palmans\Tracker\TrackableInterface` interface. Tracker provides `Palmans\Tracker\Trackable` trait to be used by Eloquent models.
     ```php
         
         use Illuminate\Database\Eloquent\Model as Eloquent;
-        use Arrtrust\Tracker\Trackable;
-        use Arrtrust\Tracker\TrackableInterface;
+        use Palmans\Tracker\Trackable;
+        use Palmans\Tracker\TrackableInterface;
         
         class Node extends Eloquent implements TrackableInterface {
             
@@ -129,7 +129,7 @@ Installing Tracker is simple.
 
     ```
     
-6. Check the `Arrtrust\Tracker\Cruncher` class and test for statistics number crunching. It is equipped with a number of methods for different types of statistics (mostly counts) in different time spans.
+6. Check the `Palmans\Tracker\Cruncher` class and test for statistics number crunching. It is equipped with a number of methods for different types of statistics (mostly counts) in different time spans.
 
 Please check the tests and source code for further documentation, as the source code of Tracker is well tested and documented.
 

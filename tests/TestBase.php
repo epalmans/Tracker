@@ -1,6 +1,6 @@
 <?php
 
-namespace Arrtrust\Tracker\Tests;
+namespace Palmans\Tracker\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -65,6 +65,6 @@ class TestBase extends TestCase
 
     protected function getPackageProviders($app)
     {
-        return [\Arrtrust\Tracker\TrackerServiceProvider::class];
+        return [\Palmans\Tracker\TrackerServiceProvider::class];
     }
 }

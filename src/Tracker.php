@@ -1,6 +1,6 @@
 <?php
 
-namespace Arrtrust\Tracker;
+namespace Palmans\Tracker;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
@@ -82,7 +82,7 @@ class Tracker
     {
         return $this->config->get(
             'tracker.model',
-            'Arrtrust\Tracker\SiteView'
+            'Palmans\Tracker\SiteView'
         );
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Arrtrust\Tracker\Tests;
+namespace Palmans\Tracker\Tests;
 
-use Arrtrust\Tracker\SiteView;
+use Palmans\Tracker\SiteView;
 use Carbon\Carbon;
 
 class CruncherTest extends TestBase
@@ -21,7 +21,7 @@ class CruncherTest extends TestBase
      */
     protected function getCruncher()
     {
-        return $this->app->make('Arrtrust\Tracker\Cruncher');
+        return $this->app->make('Palmans\Tracker\Cruncher');
     }
 
     /**
@@ -31,7 +31,7 @@ class CruncherTest extends TestBase
      */
     protected function getTracker()
     {
-        return $this->app->make('Arrtrust\Tracker\Tracker');
+        return $this->app->make('Palmans\Tracker\Tracker');
     }
 
     /** @test */

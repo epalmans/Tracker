@@ -1,6 +1,6 @@
 <?php
 
-namespace Arrtrust\Tracker;
+namespace Palmans\Tracker;
 
 trait Trackable
 {

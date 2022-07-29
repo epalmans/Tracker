@@ -20,10 +20,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | Model which records site views.
-    | Default model is 'Arrtrust\Tracker\SiteView'.
+    | Default model is 'Palmans\Tracker\SiteView'.
     |
     */
-    'model' => Arrtrust\Tracker\SiteView::class,
+    'model' => Palmans\Tracker\SiteView::class,
 
     /*
     |--------------------------------------------------------------------------

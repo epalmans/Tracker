@@ -1,6 +1,6 @@
 <?php
 
-namespace Arrtrust\Tracker;
+namespace Palmans\Tracker;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
@@ -361,7 +361,7 @@ class Cruncher
     {
         return $this->config->get(
             'tracker.model',
-            'Arrtrust\Tracker\SiteView'
+            'Palmans\Tracker\SiteView'
         );
     }
 }

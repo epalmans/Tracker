@@ -13,10 +13,8 @@
         "analytics",
         "visitor",
         "statistics",
-        "laravel",
-        "Arrtrust\/Tracker"
+        "laravel"
     ],
-    "version": "2.0.0",
     "require": {
         "php": "^7.4|^8.0",
         "illuminate/support": "^8.0|^9.0"

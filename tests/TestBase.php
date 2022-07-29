@@ -1,10 +1,12 @@
 <?php
 
+namespace Arrtrust\Tracker\Tests;
+
 use Orchestra\Testbench\TestCase;
 
-class TestBase extends TestCase {
-
-    public function setUp()
+class TestBase extends TestCase
+{
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -13,32 +15,25 @@ class TestBase extends TestCase {
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['path.base'] = __DIR__ . '/..';
+        // $app['path.base'] = __DIR__.'/..';
 
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
+        $app['config']->set('database.default', 'testbench');
+        $app['config']->set('database.connections.testbench', [
             'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => ''
+            'prefix'   => '',
         ]);
     }
 
     protected function resetDatabase()
     {
-        // Relative to the testbench app folder: vendors/orchestra/testbench/src/fixture
-        $migrationsPath = 'tests/migrations';
-        $artisan = $this->app->make('Illuminate\Contracts\Console\Kernel');
-
-        // Migrate
-        $artisan->call('migrate', [
-            '--database' => 'sqlite',
-            '--path'     => $migrationsPath,
-        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench'
+        ])->run();
     }
 
     protected function getPackageProviders($app)
     {
-        return ['Arrtrust\Tracker\TrackerServiceProvider'];
+        return [\Arrtrust\Tracker\TrackerServiceProvider::class];
     }
-
 }

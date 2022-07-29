@@ -2,9 +2,8 @@
 
 namespace Arrtrust\Tracker;
 
-
-trait Trackable {
-
+trait Trackable
+{
     /**
      * SiteView relation
      *
@@ -26,8 +25,7 @@ trait Trackable {
      */
     public function attachTrackerView($view)
     {
-        if ( ! $this->trackerViews->contains($view->getKey()))
-        {
+        if (! $this->trackerViews->contains($view->getKey())) {
             return $this->trackerViews()->attach($view);
         }
     }
@@ -39,8 +37,7 @@ trait Trackable {
      */
     protected function getTrackerPivotTableName()
     {
-        if (property_exists($this, 'trackerPivotTable'))
-        {
+        if (property_exists($this, 'trackerPivotTable')) {
             return $this->trackerPivotTable;
         }
 
@@ -54,12 +51,10 @@ trait Trackable {
      */
     protected function getTrackerForeignKey()
     {
-        if (property_exists($this, 'trackerForeignKey'))
-        {
+        if (property_exists($this, 'trackerForeignKey')) {
             return $this->trackerForeignKey;
         }
 
         return null;
     }
-
 }

@@ -2,12 +2,11 @@
 
 namespace Arrtrust\Tracker;
 
-
 use Illuminate\Support\ServiceProvider;
 
-class TrackerServiceProvider extends ServiceProvider {
-
-    const version = '1.6.3';
+class TrackerServiceProvider extends ServiceProvider
+{
+    const version = '2.0.0';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -41,16 +40,13 @@ class TrackerServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        if ( ! $this->app->environment('production'))
-        {
-            $this->publishes([
-                __DIR__ . '/resources/config.php' => config_path('tracker.php')
-            ]);
+        $this->publishes([
+            __DIR__.'/../config/config.php' => config_path('tracker.php'),
+        ]);
 
-            $this->publishes([
-                __DIR__ . '/migrations/' => database_path('/migrations')
-            ], 'migrations');
-        }
+        $this->publishes([
+            __DIR__.'/../migrations/0000_00_00_000000_create_site_views_table.php' => database_path('/migrations/'.now()->format('Y_m_d_His').'_create_site_views_table.php'),
+        ], 'migrations');
     }
 
     /**

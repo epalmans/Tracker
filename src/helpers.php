@@ -1,7 +1,6 @@
 <?php
 
-if ( ! function_exists('tracker'))
-{
+if (! function_exists('tracker')) {
 
     /**
      * Shorthand for the tracker instance
@@ -12,5 +11,4 @@ if ( ! function_exists('tracker'))
     {
         return app()->make('tracker');
     }
-
 }

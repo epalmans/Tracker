@@ -1,12 +1,11 @@
 <?php
 
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiteViewsTable extends Migration {
-
+class CreateSiteViewsTestTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -14,11 +13,10 @@ class CreateSiteViewsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('site_views', function (Blueprint $table)
-        {
-            $table->increments('id');
+        Schema::create('site_views', function (Blueprint $table) {
+            $table->id();
 
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
 
             $table->string('http_referer', 2000)->nullable();
             $table->string('url', 2000);
@@ -47,5 +45,4 @@ class CreateSiteViewsTable extends Migration {
     {
         Schema::drop('site_views');
     }
-
 }

@@ -2,11 +2,10 @@
 
 namespace Arrtrust\Tracker;
 
-
 use Illuminate\Support\Facades\Facade;
 
-class TrackerFacade extends Facade{
-
+class TrackerFacade extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -16,5 +15,4 @@ class TrackerFacade extends Facade{
     {
         return 'tracker';
     }
-
 }

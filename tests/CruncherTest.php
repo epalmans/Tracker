@@ -1,11 +1,13 @@
 <?php
 
-use Carbon\Carbon;
+namespace Arrtrust\Tracker\Tests;
+
 use Arrtrust\Tracker\SiteView;
+use Carbon\Carbon;
 
-class CruncherTest extends TestBase {
-
-    public function setUp()
+class CruncherTest extends TestBase
+{
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +35,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_last_visited_date()
+    public function it_gets_last_visited_date()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -60,7 +62,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_last_visited_count()
+    public function it_gets_last_visited_count()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -89,7 +91,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_today_count()
+    public function it_gets_today_count()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -118,7 +120,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_count_it_between()
+    public function it_gets_count_it_between()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -152,7 +154,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_relative_year_count()
+    public function it_gets_relative_year_count()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -181,7 +183,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_relative_month_count()
+    public function it_gets_relative_month_count()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -210,7 +212,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_relative_week_count()
+    public function it_gets_relative_week_count()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -239,7 +241,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_count_for_day()
+    public function it_gets_count_for_day()
     {
         $cruncher = $this->getCruncher();
         $tracker = $this->getTracker();
@@ -263,7 +265,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_count_per_month()
+    public function it_gets_count_per_month()
     {
         $cruncher = $this->getCruncher();
 
@@ -276,7 +278,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_count_per_week()
+    public function it_gets_count_per_week()
     {
         $cruncher = $this->getCruncher();
 
@@ -289,7 +291,7 @@ class CruncherTest extends TestBase {
     }
 
     /** @test */
-    function it_gets_count_per_day()
+    public function it_gets_count_per_day()
     {
         $cruncher = $this->getCruncher();
 
@@ -300,5 +302,4 @@ class CruncherTest extends TestBase {
             $statistics
         );
     }
-
 }

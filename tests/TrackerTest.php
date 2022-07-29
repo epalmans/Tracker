@@ -1,26 +1,28 @@
 <?php
 
+namespace Arrtrust\Tracker\Tests;
+
 use Arrtrust\Tracker\Tracker;
+use Prophecy\PhpUnit\ProphecyTrait;
 
-class TrackerTest extends TestBase {
-
+class TrackerTest extends TestBase
+{
+    use ProphecyTrait;
     /**
      * Setup test
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->app['router']->get('/home', function ()
-        {
+        $this->app['router']->get('/home', function () {
             return '';
         });
-        $this->app['router']->get('/test', function ()
-        {
+        $this->app['router']->get('/test', function () {
             return '';
         });
 
-        $this->app['session']->set('tracker.views', []);
+        $this->app['session']->put('tracker.views', []);
     }
 
     /**
@@ -34,7 +36,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_returns_the_model_name()
+    public function it_returns_the_model_name()
     {
         $tracker = $this->getTracker();
 
@@ -45,7 +47,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_makes_a_new_site_view_model()
+    public function it_makes_a_new_site_view_model()
     {
         $tracker = $this->getTracker();
 
@@ -56,7 +58,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_returns_the_current_view()
+    public function it_returns_the_current_view()
     {
         $tracker = $this->getTracker();
 
@@ -67,11 +69,11 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_checks_if_the_current_view_is_unique()
+    public function it_checks_if_the_current_view_is_unique()
     {
         $tracker = $this->getTracker();
 
-        $this->visit('/home');
+        $this->get('/home');
 
         $this->assertTrue(
             $tracker->isViewUnique()
@@ -85,7 +87,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_checks_if_current_view_is_valid()
+    public function it_checks_if_current_view_is_valid()
     {
         $tracker = $this->getTracker();
 
@@ -103,7 +105,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_saves_the_current_view()
+    public function it_saves_the_current_view()
     {
         $tracker = $this->getTracker();
 
@@ -113,7 +115,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_saves_only_if_unique()
+    public function it_saves_only_if_unique()
     {
         $tracker = $this->getTracker();
 
@@ -127,7 +129,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_adds_and_saves_trackables()
+    public function it_adds_and_saves_trackables()
     {
         $tracker = $this->getTracker();
 
@@ -144,7 +146,7 @@ class TrackerTest extends TestBase {
     }
 
     /** @test */
-    function it_pauses_and_resumes_recording()
+    public function it_pauses_and_resumes_recording()
     {
         $tracker = $this->getTracker();
 
@@ -164,5 +166,4 @@ class TrackerTest extends TestBase {
             $tracker->saveEnabled()
         );
     }
-
 }

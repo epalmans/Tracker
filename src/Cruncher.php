@@ -2,13 +2,12 @@
 
 namespace Arrtrust\Tracker;
 
-
 use Carbon\Carbon;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
-class Cruncher {
-
+class Cruncher
+{
     /** Config repository @var ConfigRepository */
     protected $config;
 
@@ -83,17 +82,14 @@ class Cruncher {
      */
     public function getCountInBetween(Carbon $from, Carbon $until = null, $locale = null, $query = null, $cacheKey = null)
     {
-        if (is_null($until))
-        {
+        if (is_null($until)) {
             $until = Carbon::now();
         }
 
-        if ( ! is_null($cacheKey))
-        {
+        if (! is_null($cacheKey)) {
             $count = $this->getCachedCountBetween($from, $until, $locale, $cacheKey);
 
-            if ( ! is_null($count))
-            {
+            if (! is_null($count)) {
                 return $count;
             }
         }
@@ -135,8 +131,7 @@ class Cruncher {
     protected function cacheCountBetween($count, Carbon $from, Carbon $until, $locale, $cacheKey)
     {
         // Cache only if cacheKey is present
-        if ($cacheKey && ($until->timestamp < Carbon::now()->timestamp))
-        {
+        if ($cacheKey && ($until->timestamp < Carbon::now()->timestamp)) {
             $key = $this->makeBetweenCacheKey($from, $until, $locale, $cacheKey);
 
             $this->cache->put($key, $count, 525600);
@@ -154,10 +149,10 @@ class Cruncher {
      */
     protected function makeBetweenCacheKey(Carbon $from, Carbon $until, $locale, $cacheKey)
     {
-        $key = 'tracker.between.' . $cacheKey . '.';
-        $key .= (is_null($locale) ? '' : $locale . '.');
+        $key = 'tracker.between.'.$cacheKey.'.';
+        $key .= (is_null($locale) ? '' : $locale.'.');
 
-        return $key . $from->timestamp . '-' . $until->timestamp;
+        return $key.$from->timestamp.'-'.$until->timestamp;
     }
 
     /**
@@ -171,8 +166,7 @@ class Cruncher {
      */
     public function getRelativeYearCount($end = null, $locale = null, $query = null, $cacheKey = null)
     {
-        if (is_null($end))
-        {
+        if (is_null($end)) {
             $end = Carbon::today();
         }
 
@@ -190,8 +184,7 @@ class Cruncher {
      */
     public function getRelativeMonthCount($end = null, $locale = null, $query = null, $cacheKey = null)
     {
-        if (is_null($end))
-        {
+        if (is_null($end)) {
             $end = Carbon::today();
         }
 
@@ -209,8 +202,7 @@ class Cruncher {
      */
     public function getRelativeWeekCount($end = null, $locale = null, $query = null, $cacheKey = null)
     {
-        if (is_null($end))
-        {
+        if (is_null($end)) {
             $end = Carbon::today();
         }
 
@@ -228,8 +220,7 @@ class Cruncher {
      */
     public function getRelativeDayCount($end = null, $locale = null, $query = null, $cacheKey = null)
     {
-        if (is_null($end))
-        {
+        if (is_null($end)) {
             $end = Carbon::today();
         }
 
@@ -247,8 +238,7 @@ class Cruncher {
      */
     public function getCountForDay(Carbon $day = null, $locale = null, $query = null, $cacheKey = null)
     {
-        if (is_null($day))
-        {
+        if (is_null($day)) {
             $day = Carbon::now();
         }
 
@@ -318,27 +308,25 @@ class Cruncher {
         $statistics = [];
         $labels = [];
 
-        if (is_null($until))
-        {
+        if (is_null($until)) {
             $until = Carbon::now();
         }
 
-        $until->{'startOf' . $span}();
+        $until->{'startOf'.$span}();
 
-        while ($until->gt($from))
-        {
+        while ($until->gt($from)) {
             $start = $until->copy();
-            $end = $until->copy()->{'endOf' . $span}();
+            $end = $until->copy()->{'endOf'.$span}();
 
             $labels[] = $until->copy();
             $statistics[] = $this->getCountInBetween($start, $end, $locale, clone $query, $cacheKey);
 
-            $until->{'sub' . $span}();
+            $until->{'sub'.$span}();
         }
 
         return [
             array_reverse($statistics),
-            array_reverse($labels)
+            array_reverse($labels),
         ];
     }
 
@@ -351,15 +339,13 @@ class Cruncher {
      */
     protected function determineLocaleAndQuery($locale, $query)
     {
-        if (is_null($query))
-        {
+        if (is_null($query)) {
             $modelName = $this->getViewModelName();
 
             $query = with(new $modelName)->newQuery();
         }
 
-        if ($locale)
-        {
+        if ($locale) {
             $query->where('locale', $locale);
         }
 
@@ -378,5 +364,4 @@ class Cruncher {
             'Arrtrust\Tracker\SiteView'
         );
     }
-
 }

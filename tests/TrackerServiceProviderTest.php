@@ -1,9 +1,11 @@
 <?php
 
-class TrackerServiceProviderTest extends TestBase {
+namespace Arrtrust\Tracker\Tests;
 
+class TrackerServiceProviderTest extends TestBase
+{
     /** @test */
-    function it_registers_the_tracker_service()
+    public function it_registers_the_tracker_service()
     {
         $this->assertInstanceOf(
             'Arrtrust\Tracker\Tracker',
@@ -12,12 +14,11 @@ class TrackerServiceProviderTest extends TestBase {
     }
 
     /** @test */
-    function it_allows_access_via_helper()
+    public function it_allows_access_via_helper()
     {
         $this->assertInstanceOf(
             'Arrtrust\Tracker\Tracker',
             app('tracker')
         );
     }
-
 }

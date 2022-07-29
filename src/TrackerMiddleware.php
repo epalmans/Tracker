@@ -2,11 +2,10 @@
 
 namespace Arrtrust\Tracker;
 
-
 use Closure;
 
-class TrackerMiddleware {
-
+class TrackerMiddleware
+{
     /**
      * Run the request filter.
      *
@@ -22,5 +21,4 @@ class TrackerMiddleware {
 
         return $response;
     }
-
 }

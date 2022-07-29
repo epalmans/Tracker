@@ -2,14 +2,12 @@
 
 namespace Arrtrust\Tracker;
 
-
-interface TrackableInterface {
-
+interface TrackableInterface
+{
     /**
      * Attaches the view to trackable
      *
      * @param $view
      */
     public function attachTrackerView($view);
-
 }

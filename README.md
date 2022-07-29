@@ -1,12 +1,12 @@
 # Tracker
-Simple site visit/statistics tracker for Laravel 5.
+Simple site visit/statistics tracker for Laravel.
 
 ---
 
 Tracker provides a simple way to track your site visits and their statistics.
 
 ## Features
-- Compatible with Laravel 5
+- Compatible with Laravel 8+
 - Middleware for automatically recording the site view
 - Associate site views to Eloquent models to track their views
 - Persists unique views based on URL, method, and IP address
@@ -18,29 +18,21 @@ Tracker provides a simple way to track your site visits and their statistics.
 ## Installation
 Installing Tracker is simple.
 
-1. Pull this package in through [Composer](https://getcomposer.org).
+1. Pull this package in through [Composer](https://packagist.org/packages/epalmans/tracker).
+
+    ```bash
+    composer install epalmans/tracker
+    ```
 
     ```js
     {
         "require": {
-            "arrtrust/tracker": "~1.6"
+            "epalmans/tracker": "^2.0"
         }
     }
     ```
 
-2. In order to register Tracker Service Provider add `'Arrtrust\Tracker\TrackerServiceProvider'` to the end of `providers` array in your `config/app.php` file.
-    ```php
-    'providers' => array(
-    
-        'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-        'Illuminate\Auth\AuthServiceProvider',
-        ...
-        'Arrtrust\Tracker\TrackerServiceProvider',
-    
-    ),
-    ```
-
-3. You may configure the default behaviour of Tracker by publishing and modifying the configuration file. To do so, use the following command.
+2. You may configure the default behaviour of Tracker by publishing and modifying the configuration file. To do so, use the following command.
     ```bash
     php artisan vendor:publish
     ```
@@ -48,19 +40,7 @@ Installing Tracker is simple.
     
     This will also publish the migration file for the default `SiteView` model. Do not forget to migrate your database before using Tracker.
 
-4. In order to register the Facade add the following line to the end of `aliases` array in your `config/app.php` file.
-   ```php
-   'aliases' => array(
-   
-       'App'        => 'Illuminate\Support\Facades\App',
-       'Artisan'    => 'Illuminate\Support\Facades\Artisan',
-       ...
-       'Tracker'   => 'Arrtrust\Tracker\TrackerFacade'
-   
-   ),
-   ```
-
-5. You may now access Tracker either by the Facade or the helper function.
+3. You may now access Tracker either by the Facade or the helper function.
     ```php
     tracker()->getCurrent();
     Tracker::saveCurrent();
@@ -75,7 +55,7 @@ Installing Tracker is simple.
     Tracker::flushOlderThenOrBetween(Carbon::now(), Carbon::now()->subYear());
     ```
 
-6. It is important to record views by using the supplied middleware to record correct app runtime and memory information. To do so register the middleware in `app\Http\Kernel`.
+4. It is important to record views by using the supplied middleware to record correct app runtime and memory information. To do so register the middleware in `app\Http\Kernel`.
     ```php
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
@@ -87,7 +67,7 @@ Installing Tracker is simple.
     ```
     It is better to register this middleware as a routeMiddleware instead of a global middleware and use it in routes or route groups definitions as it may not be necessary to persist all site view. This will persist and attach any Trackable that is added to stack to site views automatically when the request has been handled by Laravel.
     
-7. To attach views to any model or class, you should implement the `Arrtrust\Tracker\TrackableInterface` interface. Tracker provides `Arrtrust\Tracker\Trackable` trait to be used by Eloquent models.
+5. To attach views to any model or class, you should implement the `Arrtrust\Tracker\TrackableInterface` interface. Tracker provides `Arrtrust\Tracker\Trackable` trait to be used by Eloquent models.
     ```php
         
         use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -119,8 +99,8 @@ Installing Tracker is simple.
             {
                 Schema::create('node_site_view', function (Blueprint $table)
                 {
-                    $table->integer('node_id')->unsigned();
-                    $table->integer('site_view_id')->unsigned();
+                    $table->unsignedBigInteger('node_id');
+                    $table->unsignedBigInteger('site_view_id');
         
                     $table->foreign('node_id')
                         ->references('id')
@@ -149,9 +129,9 @@ Installing Tracker is simple.
 
     ```
     
-8. Check the `Arrtrust\Tracker\Cruncher` class and test for statistics number crunching. It is equipped with a number of methods for different types of statistics (mostly counts) in different time spans.
+6. Check the `Arrtrust\Tracker\Cruncher` class and test for statistics number crunching. It is equipped with a number of methods for different types of statistics (mostly counts) in different time spans.
 
 Please check the tests and source code for further documentation, as the source code of Tracker is well tested and documented.
 
 ## License
-Tracker is released under [MIT License](https://github.com/arrtrust/Tracker/blob/master/LICENSE).
+Tracker is released under [MIT License](https://github.com/epalmans/Tracker/blob/master/LICENSE).

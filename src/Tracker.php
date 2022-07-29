@@ -2,14 +2,13 @@
 
 namespace Arrtrust\Tracker;
 
-
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 
-class Tracker {
-
+class Tracker
+{
     /**
      * @var bool
      */
@@ -95,8 +94,7 @@ class Tracker {
      */
     public function getCurrent()
     {
-        if (is_null($this->current))
-        {
+        if (is_null($this->current)) {
             $siteView = $this->makeNewViewModel();
 
             $this->current = $siteView;
@@ -126,7 +124,7 @@ class Tracker {
             'http_user_agent'      => $request->server('HTTP_USER_AGENT'),
             'http_accept_language' => $request->server('HTTP_ACCEPT_LANGUAGE'),
             'locale'               => $this->app->getLocale(),
-            'request_time'         => $request->server('REQUEST_TIME')
+            'request_time'         => $request->server('REQUEST_TIME'),
         ];
     }
 
@@ -137,13 +135,11 @@ class Tracker {
      */
     public function saveCurrent()
     {
-        if ($this->saveEnabled() && $this->isViewValid() && $this->isViewUnique())
-        {
+        if ($this->saveEnabled() && $this->isViewValid() && $this->isViewUnique()) {
             $success = $this->saveCurrentModel();
 
             // Keep on only if the model save has succeeded
-            if ($success)
-            {
+            if ($success) {
                 $this->storeCurrentHash();
 
                 $this->saveTrackables(
@@ -165,7 +161,7 @@ class Tracker {
      */
     public function saveEnabled()
     {
-        return (!$this->paused && $this->config->get('tracker.enabled', true));
+        return ! $this->paused && $this->config->get('tracker.enabled', true);
     }
 
     /**
@@ -178,17 +174,14 @@ class Tracker {
     {
         $userAgent = strtolower($this->request->server('HTTP_USER_AGENT'));
 
-        if (is_null($userAgent))
-        {
+        if (is_null($userAgent)) {
             return false;
         }
 
         $filters = $this->getBotFilter();
 
-        foreach ($filters as $filter)
-        {
-            if (strpos($userAgent, $filter) !== false)
-            {
+        foreach ($filters as $filter) {
+            if (strpos($userAgent, $filter) !== false) {
                 return false;
             }
         }
@@ -224,7 +217,7 @@ class Tracker {
             'qwant',
             'dotbot',
             'feedfetcher',
-            'metauri'
+            'metauri',
         ]);
     }
 
@@ -237,8 +230,7 @@ class Tracker {
     {
         $hash = $this->getCurrentHash();
 
-        if (in_array($hash, $this->session->get('tracker.views', [])))
-        {
+        if (in_array($hash, $this->session->get('tracker.views', []))) {
             return false;
         }
 
@@ -252,11 +244,10 @@ class Tracker {
      */
     protected function getCurrentHash()
     {
-        if ($this->currentHash === null)
-        {
+        if ($this->currentHash === null) {
             $this->currentHash = md5(
-                $this->request->fullUrl() .
-                $this->request->method() .
+                $this->request->fullUrl().
+                $this->request->method().
                 $this->request->getClientIp()
             );
         }
@@ -305,8 +296,7 @@ class Tracker {
      */
     protected function saveTrackables($view, $success)
     {
-        foreach ($this->trackables as $trackable)
-        {
+        foreach ($this->trackables as $trackable) {
             $trackable->attachTrackerView($view);
         }
 

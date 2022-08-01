@@ -1,9 +1,11 @@
 # Tracker
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/palmans/tracker.svg?style=flat-square)](https://packagist.org/packages/palmans/tracker)
+
 Simple site visit/statistics tracker for Laravel.
-[fork of [Arrtrust/Tracker](https://github.com/Arrtrust/Tracker)]
 ---
 
-Tracker provides a simple way to track your site visits and their statistics.
+Tracker provides a simple way to track your site visits and their statistics. This is a fork of [Arrtrust/Tracker](https://github.com/Arrtrust/Tracker) - providing the same functionality, but modernized.
 
 ## Features
 - Compatible with Laravel 8+
@@ -18,7 +20,7 @@ Tracker provides a simple way to track your site visits and their statistics.
 ## Installation
 Installing Tracker is simple.
 
-1. Pull this package in through [Composer](https://packagist.org/packages/epalmans/tracker).
+1. Pull this package in through [Composer](https://packagist.org/packages/palmans/tracker).
 
     ```bash
     composer install epalmans/tracker
@@ -62,7 +64,7 @@ Installing Tracker is simple.
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'guard' => \App\Http\Middleware\Guard::class,
-        'track' => \Palmans\Tracker\TrackerMiddleware::class
+        'track' => \Palmans\Tracker\TrackerMiddleware::class,
     ];
     ```
     It is better to register this middleware as a routeMiddleware instead of a global middleware and use it in routes or route groups definitions as it may not be necessary to persist all site view. This will persist and attach any Trackable that is added to stack to site views automatically when the request has been handled by Laravel.
@@ -74,10 +76,11 @@ Installing Tracker is simple.
         use Palmans\Tracker\Trackable;
         use Palmans\Tracker\TrackableInterface;
         
-        class Node extends Eloquent implements TrackableInterface {
-            
+        class Node extends Eloquent implements TrackableInterface
+        {
             use Trackable;
-            
+
+            // ...            
         }
     ```
     
@@ -88,8 +91,8 @@ Installing Tracker is simple.
         use Illuminate\Database\Schema\Blueprint;
         use Illuminate\Database\Migrations\Migration;
         
-        class CreateNodeSiteViewPivotTable extends Migration {
-        
+        class CreateNodeSiteViewPivotTable extends Migration
+        {       
             /**
              * Run the migrations.
              *

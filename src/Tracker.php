@@ -126,6 +126,7 @@ class Tracker
             'http_user_agent'      => $request->server('HTTP_USER_AGENT'),
             'http_accept_language' => $request->server('HTTP_ACCEPT_LANGUAGE'),
             'locale'               => $this->app->getLocale(),
+            'ip'                   => $request->ip(),
             'requested_at'         => Carbon::createFromTimestamp($request->server('REQUEST_TIME')),
         ];
     }

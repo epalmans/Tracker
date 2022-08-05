@@ -36,7 +36,7 @@ Installing Tracker is simple.
 
 2. You may configure the default behaviour of Tracker by publishing and modifying the configuration file. To do so, use the following command.
     ```bash
-    php artisan vendor:publish
+    php artisan vendor:publish --provider=Palmans\Tracker\TrackerServiceProvider
     ```
     Than, you will find the configuration file on the `config/tracker.php` path. Information about the options can be found in the comments of this file. All of the options in the config file are optional, and falls back to default if not specified; remove an option if you would like to use the default.
     

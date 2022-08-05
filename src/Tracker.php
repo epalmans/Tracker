@@ -6,6 +6,7 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Support\Carbon;
 
 class Tracker
 {
@@ -117,14 +118,14 @@ class Tracker
 
         return [
             'user_id'              => $userId,
-            'http_referer'         => $request->server('HTTP_REFERER'),
             'url'                  => $request->fullUrl(),
+            'http_referer'         => $request->server('HTTP_REFERER'),
             'request_method'       => $request->method(),
             'request_path'         => $request->getPathInfo(),
             'http_user_agent'      => $request->server('HTTP_USER_AGENT'),
             'http_accept_language' => $request->server('HTTP_ACCEPT_LANGUAGE'),
             'locale'               => $this->app->getLocale(),
-            'request_time'         => $request->server('REQUEST_TIME'),
+            'requested_at'         => Carbon::createFromTimestamp($request->server('REQUEST_TIME')),
         ];
     }
 

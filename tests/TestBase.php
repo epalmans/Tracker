@@ -55,7 +55,7 @@ class TestBase extends TestCase
             $table->string('http_accept_language', 64)->nullable();
             $table->string('locale', 8)->index();
 
-            $table->bigInteger('request_time');
+            $table->timestamp('requested_at');
             $table->integer('app_time');
             $table->bigInteger('memory');
 

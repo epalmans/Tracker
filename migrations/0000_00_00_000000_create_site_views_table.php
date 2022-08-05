@@ -18,8 +18,8 @@ class CreateSiteViewsTable extends Migration
 
             $table->unsignedBigInteger('user_id')->nullable();
 
-            $table->string('http_referer', 2000)->nullable();
             $table->string('url', 2000);
+            $table->string('http_referer', 2000)->nullable();
 
             $table->string('request_method', 16);
             $table->string('request_path');
@@ -28,7 +28,7 @@ class CreateSiteViewsTable extends Migration
             $table->string('http_accept_language', 64)->nullable();
             $table->string('locale', 8)->index();
 
-            $table->bigInteger('request_time');
+            $table->timestamp('requested_at');
             $table->integer('app_time');
             $table->bigInteger('memory');
 

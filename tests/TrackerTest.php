@@ -2,14 +2,14 @@
 
 namespace Palmans\Tracker\Tests;
 
-use Illuminate\Support\Facades\Config;
-use Palmans\Tracker\SiteView;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithSession;
 use Palmans\Tracker\Tracker;
 use Prophecy\PhpUnit\ProphecyTrait;
 
 class TrackerTest extends TestBase
 {
     use ProphecyTrait;
+    use InteractsWithSession;
 
     /**
      * Setup test
@@ -25,7 +25,7 @@ class TrackerTest extends TestBase
             return '';
         });
 
-        $this->app['session']->put('tracker.views', []);
+        $this->session(['tracker.views' => []]);
     }
 
     /**
@@ -128,7 +128,7 @@ class TrackerTest extends TestBase
             $tracker->saveCurrent()
         );
 
-        // $this->assertTrue($tracker->getCurrent()->unique);
+        $this->assertTrue($tracker->getCurrent()->unique);
 
         $this->assertFalse(
             $tracker->saveCurrent()
@@ -137,7 +137,7 @@ class TrackerTest extends TestBase
 
     /** @test */
     public function it_saves_if_uniqueness_not_configured()
-    {       
+    {
         $this->app->config->set('tracker.only_unique', false);
 
         $tracker = $this->getTracker();
@@ -146,13 +146,15 @@ class TrackerTest extends TestBase
             $tracker->saveCurrent()
         );
 
-        // $this->assertTrue($tracker->getCurrent()->unique);
-        
+        $this->assertTrue($tracker->getCurrent()->unique);
+
+        $tracker = $this->getTracker(); // reinitialize tracker (simulate subsequent request)
+
         $this->assertTrue(
             $tracker->saveCurrent()
         );
-        
-        // $this->assertFalse($tracker->getCurrent()->unique);
+
+        $this->assertFalse($tracker->getCurrent()->unique);
     }
 
     /** @test */

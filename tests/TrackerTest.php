@@ -8,6 +8,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 class TrackerTest extends TestBase
 {
     use ProphecyTrait;
+
     /**
      * Setup test
      */
@@ -76,13 +77,13 @@ class TrackerTest extends TestBase
         $this->get('/home');
 
         $this->assertTrue(
-            $tracker->isViewUnique()
+            $tracker->isViewUniqueForSession()
         );
 
         $tracker->saveCurrent();
 
         $this->assertFalse(
-            $tracker->isViewUnique()
+            $tracker->isViewUniqueForSession()
         );
     }
 

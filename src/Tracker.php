@@ -138,7 +138,7 @@ class Tracker
      */
     public function saveCurrent()
     {
-        if ($this->saveEnabled() && $this->isViewValid() && $this->isViewUnique()) {
+        if ($this->saveEnabled() && $this->isViewValid() && $this->isViewUniqueForSession()) {
             $success = $this->saveCurrentModel();
 
             // Keep on only if the model save has succeeded
@@ -225,11 +225,11 @@ class Tracker
     }
 
     /**
-     * Checks if the current request is unique
+     * Checks if the current request is unique for the session
      *
      * @return bool
      */
-    public function isViewUnique()
+    public function isViewUniqueForSession()
     {
         $hash = $this->getCurrentHash();
 

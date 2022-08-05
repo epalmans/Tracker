@@ -18,12 +18,13 @@ class CreateSiteViewsTable extends Migration
 
             $table->unsignedBigInteger('user_id')->nullable();
 
-            $table->string('url', 2000);
-            $table->string('http_referer', 2000)->nullable();
-
             $table->string('request_method', 16);
+            $table->string('url', 2000);
+            
             $table->string('request_path');
-
+            $table->string('route')->nullable();
+            
+            $table->string('http_referer', 2000)->nullable();
             $table->string('http_user_agent')->nullable();
             $table->string('http_accept_language', 64)->nullable();
             $table->string('locale', 8)->index();

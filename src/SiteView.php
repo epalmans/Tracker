@@ -25,6 +25,11 @@ class SiteView extends Eloquent
         });
     }
 
+    public function user()
+    {
+        return $this->belongsTo(config('tracker.user_model', '\App\Models\User'));
+    }
+
     /**
      * Scope for choosing by date
      *

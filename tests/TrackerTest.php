@@ -2,6 +2,8 @@
 
 namespace Palmans\Tracker\Tests;
 
+use Illuminate\Support\Facades\Config;
+use Palmans\Tracker\SiteView;
 use Palmans\Tracker\Tracker;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -116,17 +118,41 @@ class TrackerTest extends TestBase
     }
 
     /** @test */
-    public function it_saves_only_if_unique()
+    public function it_saves_only_once_if_uniqueness_configured()
     {
+        $this->app->config->set('tracker.only_unique', true);
+
         $tracker = $this->getTracker();
 
         $this->assertTrue(
             $tracker->saveCurrent()
         );
 
+        // $this->assertTrue($tracker->getCurrent()->unique);
+
         $this->assertFalse(
             $tracker->saveCurrent()
         );
+    }
+
+    /** @test */
+    public function it_saves_if_uniqueness_not_configured()
+    {       
+        $this->app->config->set('tracker.only_unique', false);
+
+        $tracker = $this->getTracker();
+
+        $this->assertTrue(
+            $tracker->saveCurrent()
+        );
+
+        // $this->assertTrue($tracker->getCurrent()->unique);
+        
+        $this->assertTrue(
+            $tracker->saveCurrent()
+        );
+        
+        // $this->assertFalse($tracker->getCurrent()->unique);
     }
 
     /** @test */

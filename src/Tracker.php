@@ -127,6 +127,7 @@ class Tracker
             'http_accept_language' => $request->server('HTTP_ACCEPT_LANGUAGE'),
             'locale'               => $this->app->getLocale(),
             'ip'                   => $request->ip(),
+            'unique'               => $this->isViewUniqueForSession(),
             'requested_at'         => Carbon::createFromTimestamp($request->server('REQUEST_TIME')),
         ];
     }
@@ -138,23 +139,31 @@ class Tracker
      */
     public function saveCurrent()
     {
-        if ($this->saveEnabled() && $this->isViewValid() && $this->isViewUniqueForSession()) {
-            $success = $this->saveCurrentModel();
-
-            // Keep on only if the model save has succeeded
-            if ($success) {
-                $this->storeCurrentHash();
-
-                $this->saveTrackables(
-                    $this->getCurrent(),
-                    $success
-                );
-            }
-
-            return $success;
+        if (! $this->saveEnabled() || ! $this->isViewValid()) {
+            return false;
         }
 
-        return false;
+        $isUnique = $this->isViewUniqueForSession();
+
+        if ($this->config->get('tracker.only_unique', false) && ! $isUnique) {
+            return false;
+        }
+
+        $success = $this->saveCurrentModel();
+
+        // Keep on only if the model save has succeeded
+        if ($success) {
+            if ($isUnique) {
+                $this->storeCurrentHash();
+            }
+
+            $this->saveTrackables(
+                $this->getCurrent(),
+                $success
+            );
+        }
+
+        return $success;
     }
 
     /**
@@ -251,7 +260,7 @@ class Tracker
             $this->currentHash = md5(
                 $this->request->fullUrl().
                 $this->request->method().
-                $this->request->getClientIp()
+                $this->request->ip()
             );
         }
 

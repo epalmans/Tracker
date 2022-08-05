@@ -23,7 +23,7 @@ Installing Tracker is simple.
 1. Pull this package in through [Composer](https://packagist.org/packages/palmans/tracker).
 
     ```bash
-    composer install palmans/tracker
+    composer require palmans/tracker
     ```
 
     ```js

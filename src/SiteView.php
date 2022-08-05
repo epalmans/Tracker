@@ -13,6 +13,7 @@ class SiteView extends Eloquent
     protected $casts = [
         'requested_at' => 'datetime',
         'created_at' => 'datetime',
+        'unique' => 'boolean',
     ];
 
     protected $guarded = [];

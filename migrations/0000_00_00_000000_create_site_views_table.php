@@ -16,7 +16,7 @@ class CreateSiteViewsTable extends Migration
         Schema::create('site_views', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable()->index();
 
             $table->string('request_method', 16);
             $table->string('url', 2000);
@@ -27,8 +27,9 @@ class CreateSiteViewsTable extends Migration
             $table->string('http_referer', 2000)->nullable();
             $table->string('http_user_agent')->nullable();
             $table->string('http_accept_language', 64)->nullable();
-            $table->string('locale', 8)->index();
+            $table->string('locale', 8);
             $table->string('ip')->nullable()->index();
+            $table->boolean('unique');
 
             $table->timestamp('requested_at')->nullable();
             $table->integer('app_time');

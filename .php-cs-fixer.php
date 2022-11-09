@@ -124,7 +124,10 @@ $rules = [
     'single_class_element_per_statement' => [
         'elements' => ['const', 'property'],
     ],
-    'single_import_per_statement' => true,
+    // 'single_import_per_statement' => true,
+    'single_import_per_statement' => [
+        'group_to_single_imports' => true,
+    ],
     'single_line_after_imports' => true,
     'single_line_comment_style' => [
         'comment_types' => ['hash'],

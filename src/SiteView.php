@@ -52,4 +52,9 @@ class SiteView extends Eloquent
 
         return $query;
     }
+
+    public function relativeUrl(): Attribute
+    {
+        return Attribute::get(fn () => (string)Str::of($this->url)->after(config('app.url'))->start('/') );
+    }
 }

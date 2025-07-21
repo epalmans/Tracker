@@ -8,7 +8,7 @@ Simple site visit/statistics tracker for Laravel.
 Tracker provides a simple way to track your site visits and their statistics. This is a fork of [Arrtrust/Tracker](https://github.com/Arrtrust/Tracker) - providing the same functionality, but modernized.
 
 ## Features
-- Compatible with Laravel 8+
+- Compatible with Laravel 11 and 12
 - Middleware for automatically recording the site view
 - Associate site views to Eloquent models to track their views
 - Persists unique views based on URL, method, and IP address
@@ -29,7 +29,7 @@ Installing Tracker is simple.
     ```js
     {
         "require": {
-            "palmans/tracker": "^2.0"
+            "palmans/tracker": "^4.0"
         }
     }
     ```
@@ -91,8 +91,7 @@ Installing Tracker is simple.
         use Illuminate\Database\Schema\Blueprint;
         use Illuminate\Database\Migrations\Migration;
         
-        class CreateNodeSiteViewPivotTable extends Migration
-        {       
+        return new class extends Migration {      
             /**
              * Run the migrations.
              *
@@ -128,7 +127,7 @@ Installing Tracker is simple.
             {
                 Schema::drop('node_site_view');
             }
-        }
+        };
 
     ```
     
